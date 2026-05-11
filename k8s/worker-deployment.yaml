@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: worker
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: worker
+
+  template:
+    metadata:
+      labels:
+        app: worker
+
+    spec:
+      containers:
+        - name: worker
+          image: otigerald/worker-app:latest
+
+          env:
+            # Redis
+            - name: REDIS_HOST
+              value: redis
+
+            # PostgreSQL
+            - name: POSTGRES_HOST
+              value: db
+
+            - name: POSTGRES_PORT
+              value: "5432"
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: POSTGRES_USER
+
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: POSTGRES_PASSWORD
+
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: POSTGRES_DB

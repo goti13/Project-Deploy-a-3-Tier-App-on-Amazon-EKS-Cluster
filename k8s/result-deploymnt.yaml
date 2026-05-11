@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+    spec:
+      containers:
+      - name: result
+        image: otigerald/result-app:latest
+        ports:
+        - containerPort: 80
+        env:
+        # PostgreSQL connection (expected by the result app)
+        - name: POSTGRES_HOST
+          value: "db"
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: POSTGRES_DB
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+spec:
+  selector:
+    app: result
+  ports:
+  - port: 80
+    targetPort: 80
