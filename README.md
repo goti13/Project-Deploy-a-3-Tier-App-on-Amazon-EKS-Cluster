@@ -406,7 +406,7 @@ Database credentials are stored in Kubernetes Secrets (base64 encoded, not encry
  
 **Gerald Oti** — DevOps / SRE Engineer
  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Gerald%20Oti-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/geraldoti)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Gerald%20Oti-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gerald-oti/)
 [![GitHub](https://img.shields.io/badge/GitHub-goti13-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/goti13)
  
 ---
